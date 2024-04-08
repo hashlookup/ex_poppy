@@ -1,0 +1,15 @@
+[package]
+name = "ex_poppy"
+version = "0.1.0"
+authors = []
+edition = "2021"
+
+[lib]
+name = "ex_poppy"
+path = "src/lib.rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+poppy = { path = "../../poppy/poppy" }
+rustler = "0.32.1"
+thiserror = "1.0.58"

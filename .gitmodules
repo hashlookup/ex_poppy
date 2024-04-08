@@ -1,0 +1,3 @@
+[submodule "poppy"]
+	path = poppy
+	url = git@github.com:hashlookup/poppy.git
