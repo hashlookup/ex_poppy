@@ -122,10 +122,10 @@ pub fn count_estimate(bf: ResourceArc<BloomFilter>) -> usize {
     bf.0.lock().unwrap().count_estimate() as usize
 }
 
-#[rustler::nif]
-pub fn data(bf: ResourceArc<BloomFilter>) -> Vec<u8> {
-    bf.0.lock().unwrap().data().to_vec()
-}
+// #[rustler::nif]
+// pub fn data(bf: ResourceArc<BloomFilter>) -> Vec<u8> {
+//     bf.0.lock().unwrap().data().to_vec()
+// }
 
 rustler::init!(
     "Elixir.ExPoppy",
@@ -141,7 +141,7 @@ rustler::init!(
         capacity,
         fpp,
         count_estimate,
-        data,
+        // data,
         load_filter,
         save
     ],
