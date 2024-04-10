@@ -42,6 +42,12 @@ defmodule ExPoppy do
 
   @doc """
   Creates a new bloom filter, specifying the filter version, and additional parameters.
+  See `with_version` for a description of the `version` parameter.
+  `opt` specifies how Poppy will optimize the bloom filter:
+  - 0: no optimization (default),
+  - 1: optimize for space,
+  - 2: optimize for speed,
+  - 3: best overall.
 
   Returns a `Reference` to the Bloom Filter or `{:error, "a message describing the error"}`
 
@@ -54,13 +60,6 @@ defmodule ExPoppy do
 
   @doc """
   Inserts a `String` into the bloom filter.
-  See `with_version` for a description of the `version` parameter.
-  `opt` specifies how Poppy will optimize the bloom filter:
-  - 0: no optimization (default),
-  - 1: optimize for space,
-  - 2: optimize for speed,
-  - 3: best overall.
-
   Returns `true` or a `{:error, "a message describing the error"}`
 
   ## Example
