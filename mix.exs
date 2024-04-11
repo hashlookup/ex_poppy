@@ -4,7 +4,7 @@ defmodule ExPoppy.MixProject do
   def project do
     [
       app: :ex_poppy,
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.16",
       start_permanent: Mix.env() == :prod,
       deps: deps()
@@ -22,7 +22,8 @@ defmodule ExPoppy.MixProject do
   defp deps do
     [
       {:rustler, "~> 0.32.1", runtime: false},
-      {:ex_doc, "~> 0.31", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.31", only: :dev, runtime: false},
+      {:plug_cowboy, "~> 2.0"}
     ]
   end
 end
