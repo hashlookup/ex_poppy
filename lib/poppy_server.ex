@@ -3,7 +3,8 @@ defmodule ExPoppy.ExPoppyServer do
 
   # Client API
   @doc """
-  Starts genserver with module name.
+  Starts genserver.
+  Process name can be set in the options.
   ## Examples
       iex(1)> {:ok, pid} = ExPoppyServer.start_link([])
       {:ok, #PID<0.188.0>}
@@ -11,19 +12,19 @@ defmodule ExPoppy.ExPoppyServer do
       ** (MatchError) no match of right hand side value: {:error, {:already_started, #PID<0.188.0>}}
   """
   def start_link(opts \\ []) do
-    GenServer.start_link(__MODULE__, opts, name: __MODULE__)
-  end
+    dbg(opts)
+    {name, opts} = Keyword.pop(opts, :name)
 
-  @doc """
-  Starts genserver with a name
-  ## Examples
-      iex(2)> {:ok, pid1} = ExPoppyServer.start_link([], :mon_poppy_serveur)
-      {:ok, #PID<0.190.0>}
-      iex(3)> GenServer.whereis(:mon_poppy_serveur)
-      #PID<0.190.0>
-  """
-  def start_link(opts, name) do
-    GenServer.start_link(__MODULE__, opts, name: name)
+    dbg(name)
+    dbg(opts)
+    case name do
+      nil ->
+        GenServer.start_link(__MODULE__, opts, name: __MODULE__)
+
+      name when is_atom(name) ->
+        IO.puts("registering name")
+        GenServer.start_link(__MODULE__, opts, name: name)
+    end
   end
 
   @doc """
