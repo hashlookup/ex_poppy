@@ -1,4 +1,4 @@
-defmodule ExPoppyServer do
+defmodule ExPoppy.ExPoppyServer do
   use GenServer
 
   # Client API
