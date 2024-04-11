@@ -24,7 +24,7 @@ defmodule ExPoppy do
   @doc """
   Creates a new bloom filter, specifying the filter version:
    - `1` for DCSO bloom filter format
-   - `2` for poppy bloom filter format
+   - `2` for poppyV2 bloom filter format
 
   See https://www.misp-project.org/2024/03/25/Poppy-a-new-bloom-filter-format-and-project.html/ for a complete explanation of the differences.
 

@@ -33,7 +33,7 @@ defmodule ExPoppy.ExPoppyServer do
       iex(4)> ExPoppyServer.insert(pid, "toto")
      :ok
   """
-  def insert(bf_pid, string) do
+  def insert(bf_pid, string) when is_pid(bf_pid) and is_binary(string) do
     GenServer.call(bf_pid, {:insert, string})
   end
 
@@ -46,7 +46,7 @@ defmodule ExPoppy.ExPoppyServer do
       iex(6)> ExPoppyServer.contains(pid, "tata")
       false
   """
-  def contains(bf_pid, string) do
+  def contains(bf_pid, string) when is_pid(bf_pid) and is_binary(string) do
     GenServer.call(bf_pid, {:contains, string})
   end
 
@@ -56,7 +56,7 @@ defmodule ExPoppy.ExPoppyServer do
       iex(7)> ExPoppyServer.version(pid)
       2
   """
-  def version(bf_pid) do
+  def version(bf_pid) when is_pid(bf_pid) do
     GenServer.call(bf_pid, {:version})
   end
 
@@ -66,7 +66,7 @@ defmodule ExPoppy.ExPoppyServer do
       iex(8)> ExPoppyServer.capacity(pid)
       10000
   """
-  def capacity(bf_pid) do
+  def capacity(bf_pid) when is_pid(bf_pid) do
     GenServer.call(bf_pid, {:capacity})
   end
 
@@ -76,7 +76,7 @@ defmodule ExPoppy.ExPoppyServer do
       iex(8)> ExPoppyServer.fpp(pid)
       0.001
   """
-  def fpp(bf_pid) do
+  def fpp(bf_pid) when is_pid(bf_pid) do
     GenServer.call(bf_pid, {:fpp})
   end
 
@@ -90,7 +90,7 @@ defmodule ExPoppy.ExPoppyServer do
       iex(4)> ExPoppyServer.count_estimate(pid)
       2
   """
-  def count_estimate(bf_pid) do
+  def count_estimate(bf_pid) when is_pid(bf_pid) do
     GenServer.call(bf_pid, {:count_estimate})
   end
 
@@ -105,7 +105,7 @@ defmodule ExPoppy.ExPoppyServer do
       iex(8)> ExPoppyServer.load(pid, "/home/jlouis/tata")
       {:error, "IO error: No such file or directory (os error 2)"}
   """
-  def load(bf_pid, path) do
+  def load(bf_pid, path) when is_pid(bf_pid) and is_binary(path) do
     GenServer.call(bf_pid, {:load, path})
   end
 
@@ -118,7 +118,7 @@ defmodule ExPoppy.ExPoppyServer do
       iex(6)> ExPoppyServer.save(pid, "/root/toto")
       {:error, "IO error: Permission denied (os error 13)"}
   """
-  def save(bf_pid, path) do
+  def save(bf_pid, path) when is_pid(bf_pid) and is_binary(path) do
     GenServer.call(bf_pid, {:save, path})
   end
 
