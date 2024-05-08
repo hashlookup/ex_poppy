@@ -148,7 +148,7 @@ checksum = "acbf1af155f9b9ef647e42cdc158db4b64a1b61f743629225fde6f3e0be2a7c7"
 name = "ex_poppy"
 version = "0.1.0"
 dependencies = [
- "poppy",
+ "poppy-filters",
  "rustler",
  "thiserror",
 ]
@@ -299,8 +299,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "de3145af08024dea9fa9914f381a17b8fc6034dfb00f3a84013f7ff43f29ed4c"
 
 [[package]]
-name = "poppy"
-version = "0.1.0"
+name = "poppy-filters"
+version = "0.1.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f15b0e4ea526b5eebe8c5f65e4cc8bd20ecc626ba015ec8f702c8b6542ba1337"
 dependencies = [
  "anyhow",
  "clap",

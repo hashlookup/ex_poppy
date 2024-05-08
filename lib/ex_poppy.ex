@@ -16,7 +16,7 @@ defmodule ExPoppy do
 
   ## Examples
 
-      iex(4)> bf = ExPoppy.new(100000, 0.01)
+      ExPoppy.new(100000, 0.01)
       #Reference<0.2530677463.222167047.167339>
   """
   def new(_capacity, _false_positive_rate), do: :erlang.nif_error(:nif_not_loaded)
@@ -31,10 +31,10 @@ defmodule ExPoppy do
   Returns a `Reference` to the Bloom Filter or `{:error, "a message describing the error"}`
 
   ## Examples
-      iex(2)> bf = ExPoppy.with_version(1, 10000, 0.001)
+      ExPoppy.with_version(1, 10000, 0.001)
       #Reference<0.362273875.1027997698.75968>
 
-      iex(3)> bf = ExPoppy.with_version(2, 10000, 0.001)
+      ExPoppy.with_version(2, 10000, 0.001)
       #Reference<0.362273875.1027997698.75988>
   """
   def with_version(_version, _capacity, _false_positive_rate),
@@ -52,7 +52,7 @@ defmodule ExPoppy do
   Returns a `Reference` to the Bloom Filter or `{:error, "a message describing the error"}`
 
   ## Examples
-      iex(3)> bf = ExPoppy.with_params(2, 10000, 0.001, 1)
+      ExPoppy.with_params(2, 10000, 0.001, 1)
       #Reference<0.2014093505.3446538246.36083>
   """
   def with_params(_version, _capacity, _false_positive_rate, _opt),
@@ -63,6 +63,7 @@ defmodule ExPoppy do
   Returns `true` or a `{:error, "a message describing the error"}`
 
   ## Example
+      iex(3)> bf = ExPoppy.new(100000, 0.01)
       iex(4)> ExPoppy.insert_str(bf, "bloom filters are cool")
       true
   """
@@ -73,6 +74,8 @@ defmodule ExPoppy do
   Checks whether a `String` may be in the bloom filter.
   Return `true` or `false`
   ## Examples
+      iex(3)> bf = ExPoppy.new(100000, 0.01)
+      iex(4)> ExPoppy.insert_str(bf, "bloom filters are cool")
       iex(6)> ExPoppy.contains_str(bf, "bloom filters are not cool.")
       false
       iex(7)> ExPoppy.contains_str(bf, "bloom filters are cool")
@@ -84,6 +87,7 @@ defmodule ExPoppy do
   @doc """
   Returns the filter version
   ## Example
+      iex(3)> bf = ExPoppy.new(100000, 0.01)
       iex(8)> ExPoppy.version(bf)
       2
   """
@@ -92,7 +96,7 @@ defmodule ExPoppy do
   @doc """
   Returns the filter capacity
   ## Example
-      iex(15)> ExPoppy.capacity(hashlookup)
+      ExPoppy.capacity(hashlookup)
       405127458
   """
   def capacity(_bloom_filter_reference), do: :erlang.nif_error(:nif_not_loaded)
@@ -100,6 +104,7 @@ defmodule ExPoppy do
   @doc """
   Returns the filter false positive rate
   ## Example
+      iex(3)> bf = ExPoppy.new(1000, 0.001)
       iex(10)> ExPoppy.fpp(bf)
       0.001
   """
@@ -108,6 +113,8 @@ defmodule ExPoppy do
   @doc """
   Returns the filter estimated number of items stored in the bloom filter.
   ## Example
+      iex(3)> bf = ExPoppy.new(1000, 0.001)
+      iex(4)> ExPoppy.insert_str(bf, "bloom filters are cool")
       iex(11)> ExPoppy.count_estimate(bf)
       1
   """
@@ -119,9 +126,9 @@ defmodule ExPoppy do
   Returns a `Reference` to the bloom filter or `{:error, "a message describing the error"}`
 
   ## Example
-      iex(13)> hashlookup = ExPoppy.load_filter("~/hashlookup-full.bloom")
+      hashlookup = ExPoppy.load_filter("~/hashlookup-full.bloom")
       {:error, "IO error: No such file or directory (os error 2)"}
-      iex(14)> hashlookup = ExPoppy.load_filter("/home/jlouis/hashlookup-full.bloom")
+      hashlookup = ExPoppy.load_filter("/home/jlouis/hashlookup-full.bloom")
       #Reference<0.2014093505.3446538246.36262>
   """
   def load_filter(_path), do: :erlang.nif_error(:nif_not_loaded)
@@ -132,9 +139,9 @@ defmodule ExPoppy do
   Returns `{}` or {:error, "a message describing the error"}
 
   ## Examples
-      iex(16)> ExPoppy.save(bf, "/home/jlouis/test.bloom")
+      ExPoppy.save(bf, "/home/jlouis/test.bloom")
       {}
-      iex(17)> ExPoppy.save(bf, "/root/test.boom")
+      ExPoppy.save(bf, "/root/test.boom")
       {:error, "IO error: Permission denied (os error 13)"}
   """
   def save(_bloom_filter_reference, _path), do: :erlang.nif_error(:nif_not_loaded)

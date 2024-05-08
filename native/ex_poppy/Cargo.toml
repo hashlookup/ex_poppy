@@ -10,6 +10,6 @@ path = "src/lib.rs"
 crate-type = ["cdylib"]
 
 [dependencies]
-poppy = { path = "../../poppy/poppy" }
+poppy = { version = "0.1.8", package = "poppy-filters"}
 rustler = "0.32.1"
 thiserror = "1.0.58"

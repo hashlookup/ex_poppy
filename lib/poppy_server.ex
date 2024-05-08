@@ -12,11 +12,8 @@ defmodule ExPoppy.ExPoppyServer do
       ** (MatchError) no match of right hand side value: {:error, {:already_started, #PID<0.188.0>}}
   """
   def start_link(opts \\ []) do
-    dbg(opts)
     {name, opts} = Keyword.pop(opts, :name)
 
-    dbg(name)
-    dbg(opts)
     case name do
       nil ->
         GenServer.start_link(__MODULE__, opts, name: __MODULE__)
