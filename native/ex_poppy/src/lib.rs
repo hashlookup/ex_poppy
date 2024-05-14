@@ -128,7 +128,7 @@ pub fn count_estimate(bf: ResourceArc<BloomFilter>) -> usize {
 // }
 
 rustler::init!(
-    "Elixir.ExPoppy",
+    "Elixir.ExPoppy.Native",
     [
         new,
         with_version,

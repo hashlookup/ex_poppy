@@ -1,6 +1,4 @@
 defmodule ExPoppy do
-  use Rustler, otp_app: :ex_poppy, crate: "ex_poppy"
-
   @moduledoc """
   Documentation for `ExPoppy`.
 
@@ -19,7 +17,7 @@ defmodule ExPoppy do
       ExPoppy.new(100000, 0.01)
       #Reference<0.2530677463.222167047.167339>
   """
-  def new(_capacity, _false_positive_rate), do: :erlang.nif_error(:nif_not_loaded)
+  defdelegate new(capacity, false_positive_rate), to: ExPoppy.Native, as: :new
 
   @doc """
   Creates a new bloom filter, specifying the filter version:
@@ -37,8 +35,7 @@ defmodule ExPoppy do
       ExPoppy.with_version(2, 10000, 0.001)
       #Reference<0.362273875.1027997698.75988>
   """
-  def with_version(_version, _capacity, _false_positive_rate),
-    do: :erlang.nif_error(:nif_not_loaded)
+  defdelegate with_version(version, capacity, false_positive_rate), to: ExPoppy.Native, as: :with_version
 
   @doc """
   Creates a new bloom filter, specifying the filter version, and additional parameters.
@@ -55,8 +52,7 @@ defmodule ExPoppy do
       ExPoppy.with_params(2, 10000, 0.001, 1)
       #Reference<0.2014093505.3446538246.36083>
   """
-  def with_params(_version, _capacity, _false_positive_rate, _opt),
-    do: :erlang.nif_error(:nif_not_loaded)
+  defdelegate with_params(version, capacity, false_positive_rate, opt), to: ExPoppy.Native, as: :with_params
 
   @doc """
   Inserts a `String` into the bloom filter.
@@ -67,8 +63,7 @@ defmodule ExPoppy do
       iex(4)> ExPoppy.insert_str(bf, "bloom filters are cool")
       true
   """
-  def insert_str(_bloom_filter_reference, _string), do: :erlang.nif_error(:nif_not_loaded)
-  # def insert_bytes(_a, _b), do: :erlang.nif_error(:nif_not_loaded)
+  defdelegate insert_str(bloom_filter_reference, string), to: ExPoppy.Native, as: :insert_str
 
   @doc """
   Checks whether a `String` may be in the bloom filter.
@@ -81,8 +76,7 @@ defmodule ExPoppy do
       iex(7)> ExPoppy.contains_str(bf, "bloom filters are cool")
       true
   """
-  def contains_str(_bloom_filter_reference, _string), do: :erlang.nif_error(:nif_not_loaded)
-  # def contains_bytes(_a, _b), do: :erlang.nif_error(:nif_not_loaded)
+  defdelegate contains_str(bloom_filter_reference, string), to: ExPoppy.Native, as: :contains_str
 
   @doc """
   Returns the filter version
@@ -91,7 +85,7 @@ defmodule ExPoppy do
       iex(8)> ExPoppy.version(bf)
       2
   """
-  def version(_bloom_filter_reference), do: :erlang.nif_error(:nif_not_loaded)
+  defdelegate version(bloom_filter_reference), to: ExPoppy.Native, as: :version
 
   @doc """
   Returns the filter capacity
@@ -99,7 +93,7 @@ defmodule ExPoppy do
       ExPoppy.capacity(hashlookup)
       405127458
   """
-  def capacity(_bloom_filter_reference), do: :erlang.nif_error(:nif_not_loaded)
+  defdelegate capacity(bloom_filter_reference), to: ExPoppy.Native, as: :capacity
 
   @doc """
   Returns the filter false positive rate
@@ -108,7 +102,7 @@ defmodule ExPoppy do
       iex(10)> ExPoppy.fpp(bf)
       0.001
   """
-  def fpp(_bloom_filter_reference), do: :erlang.nif_error(:nif_not_loaded)
+  defdelegate fpp(bloom_filter_reference), to: ExPoppy.Native, as: :fpp
 
   @doc """
   Returns the filter estimated number of items stored in the bloom filter.
@@ -118,9 +112,9 @@ defmodule ExPoppy do
       iex(11)> ExPoppy.count_estimate(bf)
       1
   """
-  def count_estimate(_bloom_filter_reference), do: :erlang.nif_error(:nif_not_loaded)
+  defdelegate count_estimate(bloom_filter_reference), to: ExPoppy.Native, as: :count_estimate
 
-  # def data(_bloom_filter_reference), do: :erlang.nif_error(:nif_not_loaded)
+  # def data(_bloom_filter_reference), do: err()
   @doc """
   Loads the filters located at `String`
   Returns a `Reference` to the bloom filter or `{:error, "a message describing the error"}`
@@ -131,7 +125,7 @@ defmodule ExPoppy do
       hashlookup = ExPoppy.load_filter("/home/jlouis/hashlookup-full.bloom")
       #Reference<0.2014093505.3446538246.36262>
   """
-  def load_filter(_path), do: :erlang.nif_error(:nif_not_loaded)
+  defdelegate load_filter(path), to: ExPoppy.Native, as: :load_filter
 
   @doc """
   Save the bloom filter to a file `String`
@@ -144,5 +138,6 @@ defmodule ExPoppy do
       ExPoppy.save(bf, "/root/test.boom")
       {:error, "IO error: Permission denied (os error 13)"}
   """
-  def save(_bloom_filter_reference, _path), do: :erlang.nif_error(:nif_not_loaded)
+  defdelegate save(bloom_filter_reference, path), to: ExPoppy.Native, as: :save
+
 end

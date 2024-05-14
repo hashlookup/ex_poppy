@@ -24,3 +24,9 @@ ex_poppy-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+# Ignore ElixirLS temp files.
+.elixir_ls/
+
+# Shared objects build by Rust.
+*.so

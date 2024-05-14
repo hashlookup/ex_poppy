@@ -11,7 +11,7 @@ defmodule ExPoppy do
   use Rustler, otp_app: :ex_poppy, crate: "ex_poppy"
 
   # When your NIF is loaded, it will override this function.
-  def add(_a, _b), do: :erlang.nif_error(:nif_not_loaded)
+  def add(_a, _b), do: err()
 end
 ```
 
