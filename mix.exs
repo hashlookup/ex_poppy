@@ -49,10 +49,15 @@ defmodule ExPoppy.MixProject do
       ],
       maintainers: ["gallypette"],
       licenses: ["BSD-3-Clause"],
-      links: %{"GitHub" => @repo_url}
+      links: %{
+        "GitHub" => @repo_url,
+        "Poppy bloom filter library explained" =>
+          "https://www.misp-project.org/2024/03/25/Poppy-a-new-bloom-filter-format-and-project.html/",
+        "Original Poppy rust library" => "https://github.com/hashlookup/poppy/",
+        "Hashlookup" => "https://hashlookup.io"
+      }
     ]
   end
-
 
   defp docs do
     [
