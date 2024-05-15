@@ -1,8 +1,8 @@
 defmodule ExPoppy.MixProject do
   use Mix.Project
 
-  @version "0.1.16"
-  @repo_url "https://github.com/gallypette/ex_poppy"
+  @version "0.1.4"
+  @repo_url "https://github.com/hashlookup/ex_poppy"
 
   def project do
     [
