@@ -1,5 +1,17 @@
-defmodule ExPoppy.ExPoppyServer do
+defmodule ExPoppyServer do
   use GenServer
+
+  @moduledoc """
+  Documentation for `ExPoppyServer`.
+
+  ExPoppyServer is a genserver holding the reference to a `ExPoppy` bloom filter in memory.
+  The main purpose of this construct is to avoid reloading a filter when not necessary.
+
+  Here is how one would add ExPoppyServer to an application's Supervisor to give access to a filter called `host.bloom`:
+
+  `{ExPoppy.ExPoppyServer, name: :poppyserver, path: Path.join([:code.priv_dir(:myapp), "host.bloom"])}`
+  """
+  @moduledoc since: "0.1.0"
 
   # Client API
   @doc """

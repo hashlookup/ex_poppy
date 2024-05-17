@@ -1,22 +1,33 @@
-defmodule ExPoppy.PoppyPlug do
+defmodule PoppyPlug do
   @behaviour Plug
   import Plug.Conn
-  alias ExPoppy.ExPoppyServer
+
+  @moduledoc """
+  Documentation for `PoppyPlug`.
+
+  PoppyPlug filters out requests that match an `ExPoppy` bloom filter served by
+  an `ExPoppyServer`. The fields to match on are passed to the plug through `opt`.
+
+  For instance to filter every requests for which the host may appear in the bloom filter:
+
+  `plug(PoppyPlug, poppy_server: :plugfestpoppy, filter: :host)`
+
+  """
 
   def init(opts) do
     opts
   end
 
   def call(%Plug.Conn{} = conn, opts) do
-    {pid, _opts} = Keyword.pop(opts, :poppy_server)
+    {process_name, opts} = Keyword.pop_first(opts, :poppy_server)
 
     poppy_server =
-      case pid do
+      case process_name do
         nil ->
-          GenServer.whereis(ExPoppy.ExPoppyServer)
+          GenServer.whereis(ExPoppyServer)
 
-        pid ->
-          pid
+        name ->
+          GenServer.whereis(name)
       end
 
     case poppy_server do
@@ -25,15 +36,23 @@ defmodule ExPoppy.PoppyPlug do
         conn
 
       _ ->
-        nil
         # it means business
-        Enum.each(opts[:filter], fn x ->
-          if ExPoppyServer.contains(poppy_server, conn[x]) do
-            conn
-            |> send_resp(403, "Bad Request")
-            |> halt()
-          else
-            conn
+        Enum.reduce(opts, conn, fn x, acc_conn ->
+          case x do
+            {:filter, :host} ->
+              if ExPoppyServer.contains(poppy_server, Map.get(acc_conn, :host)) do
+                acc_conn
+                |> send_resp(403, "Forbidden request")
+                |> halt()
+              else
+                acc_conn
+              end
+
+            {:filter, _} ->
+              acc_conn
+
+            _ ->
+              acc_conn
           end
         end)
     end

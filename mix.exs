@@ -61,7 +61,7 @@ defmodule ExPoppy.MixProject do
 
   defp docs do
     [
-      main: "ex_poppy",
+      main: "ExPoppy",
       source_ref: "#{@version}",
       source_url: @repo_url
     ]
