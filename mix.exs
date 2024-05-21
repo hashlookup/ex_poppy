@@ -13,7 +13,7 @@ defmodule ExPoppy.MixProject do
       deps: deps(),
       package: package(),
       docs: docs(),
-      description: "NIF binding for poppy using Rustler"
+      description: "NIF binding for the poppy bloom filter library using Rustler"
     ]
   end
 
