@@ -35,7 +35,9 @@ defmodule ExPoppy do
       ExPoppy.with_version(2, 10000, 0.001)
       #Reference<0.362273875.1027997698.75988>
   """
-  defdelegate with_version(version, capacity, false_positive_rate), to: ExPoppy.Native, as: :with_version
+  defdelegate with_version(version, capacity, false_positive_rate),
+    to: ExPoppy.Native,
+    as: :with_version
 
   @doc """
   Creates a new bloom filter, specifying the filter version, and additional parameters.
@@ -52,7 +54,9 @@ defmodule ExPoppy do
       ExPoppy.with_params(2, 10000, 0.001, 1)
       #Reference<0.2014093505.3446538246.36083>
   """
-  defdelegate with_params(version, capacity, false_positive_rate, opt), to: ExPoppy.Native, as: :with_params
+  defdelegate with_params(version, capacity, false_positive_rate, opt),
+    to: ExPoppy.Native,
+    as: :with_params
 
   @doc """
   Inserts a `String` into the bloom filter.
@@ -139,5 +143,4 @@ defmodule ExPoppy do
       {:error, "IO error: Permission denied (os error 13)"}
   """
   defdelegate save(bloom_filter_reference, path), to: ExPoppy.Native, as: :save
-
 end

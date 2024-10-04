@@ -1,7 +1,7 @@
 defmodule ExPoppy.MixProject do
   use Mix.Project
 
-  @version "0.1.4"
+  @version "0.2.0"
   @repo_url "https://github.com/hashlookup/ex_poppy"
 
   def project do
