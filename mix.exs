@@ -28,7 +28,7 @@ defmodule ExPoppy.MixProject do
   defp deps do
     [
       {:rustler, ">= 0.0.0", runtime: false, optional: true},
-      {:rustler_precompiled, "~> 0.6"},
+      {:rustler_precompiled, "~> 0.8.2"},
       {:ex_doc, ">= 0.0.0", only: :dev},
       {:plug_cowboy, "~> 2.0"}
     ]
