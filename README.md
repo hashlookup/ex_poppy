@@ -11,7 +11,7 @@ The package can be installed by adding `ex_poppy` to your list of dependencies i
 ```elixir
 def deps do
   [
-    {:ex_poppy, "~> 0.1.4"}
+    {:ex_poppy, "~> 0.2.0"}
   ]
 end
 ```
