@@ -22,7 +22,7 @@ impl From<ExPoppyError> for RustlerError {
 }
 
 fn load(env: Env, _: Term) -> bool {
-    rustler::resource!(BloomFilter, env);
+    let _ = rustler::resource!(BloomFilter, env);
     true
 }
 
@@ -30,7 +30,7 @@ fn load(env: Env, _: Term) -> bool {
 pub fn new(c: usize, fp: f64) -> ResourceArc<BloomFilter> {
     ResourceArc::new(BloomFilter(Mutex::new(poppy::BloomFilter::with_capacity(
         c, fp,
-    ))))
+    ).expect("Failed to create bloom filter."))))
 }
 
 #[rustler::nif]
@@ -129,21 +129,5 @@ pub fn count_estimate(bf: ResourceArc<BloomFilter>) -> usize {
 
 rustler::init!(
     "Elixir.ExPoppy.Native",
-    [
-        new,
-        with_version,
-        with_params,
-        insert_str,
-        // insert_bytes,
-        contains_str,
-        // contains_bytes,
-        version,
-        capacity,
-        fpp,
-        count_estimate,
-        // data,
-        load_filter,
-        save
-    ],
     load = load
 );
