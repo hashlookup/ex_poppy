@@ -1,6 +1,7 @@
 name: Build precompiled NIFs
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - '*'
