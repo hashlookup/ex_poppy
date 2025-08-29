@@ -1,8 +1,8 @@
 [package]
 name = "ex_poppy"
-version = "0.1.4"
+version = "0.2.1"
 authors = ["Quentin Jérôme", "Jean-Louis Huynen"]
-edition = "2021"
+edition = "2025"
 
 [lib]
 name = "ex_poppy"
@@ -10,6 +10,6 @@ path = "src/lib.rs"
 crate-type = ["cdylib"]
 
 [dependencies]
-poppy = { version = "0.2.0", package = "poppy-filters"}
+poppy = { version = "0.2.1", package = "poppy-filters"}
 rustler = { version = "0.36", default-features = false, features = ["derive", "nif_version_2_15"] }
 thiserror = "1.0.58"

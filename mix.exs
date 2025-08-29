@@ -1,7 +1,7 @@
 defmodule ExPoppy.MixProject do
   use Mix.Project
 
-  @version "0.2.0"
+  @version "0.2.1"
   @repo_url "https://github.com/hashlookup/ex_poppy"
 
   def project do
@@ -28,7 +28,7 @@ defmodule ExPoppy.MixProject do
   defp deps do
     [
       {:rustler, ">= 0.0.0", runtime: false, optional: true},
-      {:rustler_precompiled, "~> 0.8.2"},
+      {:rustler_precompiled, "~> 0.8.3"},
       {:ex_doc, ">= 0.0.0", only: :dev},
       {:plug_cowboy, "~> 2.0"}
     ]
